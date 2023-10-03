@@ -1,0 +1,69 @@
+import {PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+async function main() {
+    
+    await prisma.user.upsert({
+        where: { id: 1},
+        update: {},
+        create: {
+            id: 1,
+            username: 'Manolo', 
+            email: 'manolo89@gmail.com', 
+            password: 'clearpassword123',
+            notes: {
+                create: [
+                    {title: 'First note', tags: 'test, music, jazz', body: 'Some random text'},
+                    {title: 'Second note', tags: 'work, exercise, religion', body: 'airplane glass smartphone'},
+                    {title: 'Portugal watch black', tags: 'pet, cool, weapon', body: 'electron pendrive cloth'}
+                ]
+            }
+        }
+    });
+
+    await prisma.user.upsert({
+        where: { id: 2},
+        update: {},
+        create: {
+            id: 2, 
+            username: 'Pedro', 
+            email: 'pedro@hotmail.com', 
+            password: 'warning!Intruder',
+            notes: {
+                create: [
+                    {title: 'hack sunday ball', tags: 'potatoes, supermarket, hell', body: 'hair gun post'},
+                    {title: 'Quisque interdum metus', tags: 'eget, blandit, feugiat', body: 'Suspendisse scelerisque nulla'},
+                    {title: 'Sit amet lectus tristique sodales', tags: 'erat volutpat. Donec', body: 'consequat elit tellus'}
+                ]
+            }
+        }
+    });
+
+    await prisma.user.upsert({
+        where: { id: 3},
+        update: {},
+        create: {
+            id: 3, 
+            username: 'Roberto', 
+            email: 'roberto@protonmail.com', 
+            password: 'Aenean_id',
+            notes: {
+                create: [
+                    {title: 'per inceptos himenaeos', tags: 'Morbi posuere a nisi', body: 'a laoreet. Nam'},
+                    {title: 'Integer eu euismod enim', tags: 'Sed eu augue risus', body: 'Nunc vestibulum tempus'},
+                    {title: 'massa sed consectetur', tags: 'efficitur leo quis cursus pretium', body: 'eget metus in ipsum'}
+                ]
+            }
+        }
+    });
+    
+}
+
+main().then(async () => {
+    await prisma.$disconnect();
+  }).catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
