@@ -23,6 +23,6 @@ model Note {
   title String
   tags String
   body String
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }

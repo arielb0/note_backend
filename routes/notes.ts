@@ -23,12 +23,8 @@ notesRouter.get('/:id', async (req: Request, res: Response) => {
     const note = await prisma.note.findUnique({
         where: {id: Number.parseInt( req.params.id)}
     });
-
-    if (note) {
-        res.json(note);
-    } else {
-        res.status(404);
-    }
+    
+    res.json(note);    
     
 });
 
@@ -63,6 +59,7 @@ notesRouter.delete('/:id', async (req: Request, res: Response) => {
 
 notesRouter.get('', async (req: Request, res: Response) => {
     const notes = await prisma.note.findMany();
+
     res.json(notes);
 });
 
