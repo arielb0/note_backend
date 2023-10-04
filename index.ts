@@ -11,10 +11,10 @@ const app: Express = express();
 // Routes
 
 app.use(express.static('public'));
+app.use(express.json()); // Middleware to parse application/json
 app.use('/notes', notesRouter);
 app.use('/users', usersRouter);
 
 app.listen(process.env.PORT, () => {
-    console.log(`App is listen connections on port ${process.env.PORT}`);
-    
+    console.log(`Express server is listen connections using the url: http://${process.env.HOST}:${process.env.PORT}`);
 });

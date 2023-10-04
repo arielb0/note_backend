@@ -1,11 +1,22 @@
 import { PrismaClient } from '@prisma/client';
 import {Router, Request, Response} from 'express';
-
 var notesRouter:Router = Router();
 const prisma = new PrismaClient();
 
-notesRouter.post('', (req: Request, res: Response) => {
-    // TODO: Create a note.
+notesRouter.post('', async (req: Request, res: Response) => {
+    
+    const { title, tags, body } = req.body;
+    
+    const note = await prisma.note.create({
+        data: {
+            title,
+            tags,
+            body,
+            user: {connect: {email: 'manolo89@gmail.com'}}
+        }
+    });
+
+    res.json(note);
 });
 
 notesRouter.get('/:id', async (req: Request, res: Response) => {
@@ -17,17 +28,37 @@ notesRouter.get('/:id', async (req: Request, res: Response) => {
         res.json(note);
     } else {
         res.status(404);
-        res.end();
     }
     
 });
 
-notesRouter.patch('/:id', (req: Request, res: Response) => {
-    // TODO: Update a note.
+notesRouter.patch('/:id', async (req: Request, res: Response) => {
+    
+    const {title, tags, body} = req.body;
+
+    const note = await prisma.note.update({
+        where: {
+            id: Number.parseInt(req.params.id)
+        },
+        data: {
+            title,
+            tags,
+            body
+        }
+    });
+    
+    res.json(note);
 });
 
-notesRouter.delete('/:id', (req: Request, res: Response) => {
-    // TODO: Delete a note.
+notesRouter.delete('/:id', async (req: Request, res: Response) => {
+    
+    const note = await prisma.note.delete({
+        where: {
+            id: Number.parseInt(req.params.id)
+        }
+    })
+
+    res.json(note);
 });
 
 notesRouter.get('', async (req: Request, res: Response) => {
