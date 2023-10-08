@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import {Router, Request, Response} from 'express';
+
 var notesRouter:Router = Router();
 const prisma = new PrismaClient();
 
@@ -24,13 +25,13 @@ notesRouter.get('/:id', async (req: Request, res: Response) => {
         where: {id: Number.parseInt( req.params.id)}
     });
     
-    res.json(note);    
+    res.json(note);
     
 });
 
 notesRouter.patch('/:id', async (req: Request, res: Response) => {
     
-    const {title, tags, body} = req.body;
+    const { title, tags, body } = req.body;
 
     const note = await prisma.note.update({
         where: {
@@ -39,6 +40,7 @@ notesRouter.patch('/:id', async (req: Request, res: Response) => {
         data: {
             title,
             tags,
+            updatedAt: new Date(Date.now()),
             body
         }
     });
