@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "username": "adan",
+        "first_name": "Adan",
+        "last_name": "Smith",
+        "email": "adam87@hotmail.com",
+        "password": "Don't_store_passwords_on_clear_text321"
+    },
+    {
+        "id": 2,
+        "username": "magnolia",
+        "first_name": "Adelfa",
+        "last_name": "Gutierrez",
+        "email": "madelfa@gmail.com",
+        "password": "Warning_intruder_alert"
+    }
+]
