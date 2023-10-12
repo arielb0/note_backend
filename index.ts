@@ -14,12 +14,15 @@ const app: Express = express();
 
 // Middlewares
 
-app.use(express.static('public')); // Load static files
+app.use(express.static('public')); // Load static files from public folder.
 app.use(cors()); // Enable Cross Origin Resource Sharing (CORS)
 app.use(express.json()); // Parse application/json on req.body object
 
 // Routes
 
+app.use('', (req, res) => {
+    res.sendFile('/public/index.html');
+});
 app.use('/notes', notesRouter);
 app.use('/users', usersRouter);
 
