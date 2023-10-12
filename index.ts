@@ -20,11 +20,14 @@ app.use(express.json()); // Parse application/json on req.body object
 
 // Routes
 
-app.use('', (req, res) => {
-    res.sendFile('/public/index.html');
-});
 app.use('/notes', notesRouter);
 app.use('/users', usersRouter);
+app.use('/', (req, res) => {
+    res.sendFile('index.html', {
+        root: 'public'
+    });
+});
+
 
 // Start Express.js server
 
