@@ -22,13 +22,13 @@ app.use(express.json()); // Parse application/json on req.body object
 
 app.use('/notes', notesRouter);
 app.use('/users', usersRouter);
-/*
-app.use('/', (req, res) => {
+
+app.use('', (req, res) => {
     res.sendFile('index.html', {
         root: 'public'
     });
 });
-*/
+
 
 // Start Express.js server
 
